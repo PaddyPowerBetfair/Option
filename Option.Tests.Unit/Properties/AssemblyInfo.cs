@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Option.Tests.Unit")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("Paddy Power Betfair")]
-[assembly: AssemblyCulture("Paddy Power Betfair")]
+[assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 

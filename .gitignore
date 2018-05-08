@@ -1,0 +1,6 @@
+.vs/
+Option.Tests.Unit/bin/
+Option.Tests.Unit/obj/
+*.ncrunchsolution
+Option/obj/
+packages/

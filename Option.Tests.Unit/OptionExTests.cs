@@ -44,14 +44,6 @@ namespace Option.Tests.Unit
 
             Assert.IsTrue(option.IsNone);
         }
-        
-        // TODO FINISH TESTS FOR THIS
-
-        //[TestMethod]
-        //public void OptionExSelectionMany()
-        //{
-
-        //}
     }
 
     public struct Counter

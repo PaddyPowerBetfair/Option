@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumEx.cs" />
-    <Compile Include="IDictionaryEx.cs" />
-    <Compile Include="IEnumerableEx.cs" />
+    <Compile Include="DictionaryEx.cs" />
+    <Compile Include="EnumerableEx.cs" />
     <Compile Include="NullableEx.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionComputationExpressionBuilder.cs" />

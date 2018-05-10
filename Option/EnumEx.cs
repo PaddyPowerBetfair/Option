@@ -8,15 +8,13 @@ namespace Option
         /// Maps anything to a Some of a enum value if a correspondence exists, None otherwise.
         /// </summary>
         /// <returns></returns>
-        public static Option<TOut> TryMapByStringValue<TIn, TOut>(TIn x, bool ignoreCase = false)
+        public static Option<TOut> TryMapByStringValue<TIn, TOut>(TIn input, bool ignoreCase = false)
             where TOut : struct
         {
-            var stringValue = x.ToString();
-            var y = Enum.TryParse(stringValue, ignoreCase, out TOut enumValue)
+            var stringValue = input.ToString();
+            return Enum.TryParse(stringValue, ignoreCase, out TOut enumValue)
                        ? Option.Some(enumValue)
                        : Option.None<TOut>();
-
-            return y;
         }
 
         /// <summary>

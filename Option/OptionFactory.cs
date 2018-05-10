@@ -31,13 +31,13 @@ namespace Option
         }
 
         /// <summary>
-        /// Attempts f and returns Some on success and None on Exception
+        /// Attempts func and returns Some on success and None on Exception
         /// </summary>
-        public static Option<T> Try<T>(Func<T> f)
+        public static Option<T> Try<T>(Func<T> func)
         {
             try
             {
-                return Some(f());
+                return Some(func());
             }
             catch
             {

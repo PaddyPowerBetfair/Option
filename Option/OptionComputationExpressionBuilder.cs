@@ -7,23 +7,21 @@ namespace Option
     /// </summary>
     public class OptionComputationExpressionBuilder
     {
-        public Option<TY> Bind<TX, TY>(Option<TX> x, Func<TX, Option<TY>> f)
+        public Option<TY> Bind<TX, TY>(Option<TX> input, Func<TX, Option<TY>> func)
         {
-            if (!x.HasValue) return Option.None<TY>();
-
-            var y = f(x.Value);
-
-            return y;
+            return input.IsNone
+                ? Option.None<TY>() 
+                : func(input.Value);
         }
 
-        public TX Delay<TX>(Func<TX> f)
+        public TX Delay<TX>(Func<TX> func)
         {
-            return f();
+            return func();
         }
 
-        public Option<TX> Return<TX>(TX x)
+        public Option<TX> Return<TX>(TX input)
         {
-            return Option.Some(x);
+            return Option.Some(input);
         }
     }
 }

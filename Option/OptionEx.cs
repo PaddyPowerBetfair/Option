@@ -24,11 +24,9 @@ namespace Option
         /// </summary>
         public static Option<TY> Select<TX, TY>(this Option<TX> x, Func<TX, TY> f)
         {
-            var y = x.HasValue 
+            return x.HasValue 
                 ? Option.Some(f(x.Value)) 
                 : Option.None<TY>();
-
-            return y;
         }
 
         /// <summary>

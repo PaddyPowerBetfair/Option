@@ -2,7 +2,7 @@
 
 namespace Option
 {
-    public static class IDictionaryEx
+    public static class DictionaryEx
     {
         /// <summary>
         /// TryGetValue wrapper with option types.

@@ -4,3 +4,6 @@ Option.Tests.Unit/obj/
 *.ncrunchsolution
 Option/obj/
 packages/
+/_NCrunch_Option/
+/Option.v3.ncrunchsolution.user
+/Option/bin/

@@ -12,6 +12,9 @@ namespace Option
     {
         private static readonly Option<T> _none = new Option<T>(default(T), false);
 
+        /// <summary>
+        /// Return Value if it has a value. Otherwise throw InvalidOperationException
+        /// </summary>
         public T Value
         {
             get
@@ -86,7 +89,8 @@ namespace Option
         {
             unchecked
             {
-                return (ValueOrNull.GetHashCode() * 397) ^ HasValue.GetHashCode();
+                return (ValueOrNull.GetHashCode() * 397) 
+                    ^ HasValue.GetHashCode();
             }
         }
 

@@ -12,7 +12,7 @@ namespace Option
         /// </summary>
         public static IEnumerable<TDestination> Choose<TSource, TDestination>(this IEnumerable<TSource> input, Func<TSource, Option<TDestination>> chooser)
         {
-            CheckArgumentIsNotNull(input);
+            input.CheckArgumentIsNotNull();
 
             return input.Select(chooser)
                                .Where(o => o.HasValue)
@@ -22,11 +22,11 @@ namespace Option
         /// <summary>
         /// Returns all the values in a sequence of Options whose Option is Some.
         /// </summary>
-        public static IEnumerable<TSource> CollectSome<TSource>(this IEnumerable<Option<TSource>> input)
+        public static IEnumerable<TSource> CollectSome<TSource>(this IEnumerable<Option<TSource>> options)
         {
-            CheckArgumentIsNotNull(input);
+            options.CheckArgumentIsNotNull();
 
-            return input.Where(o => o.HasValue)
+            return options.Where(o => o.HasValue)
                                .Select(o => o.Value);
         }
 
@@ -36,17 +36,9 @@ namespace Option
         /// </summary>
         public static IEnumerable<T> Cache<T>(this IEnumerable<T> input)
         {
-            return TypeIsHotIEnumerable<T>(input.GetType()) 
+            return input.GetType().TypeIsHotIEnumerable<T>() 
                 ? input 
                 : input.ToList();
-        }
-
-        private static bool TypeIsHotIEnumerable<T>(Type type)
-        {
-            return type == typeof(List<T>) 
-                || type == typeof(T[]) 
-                || type.IsGenericType 
-                && type.GetGenericTypeDefinition() == typeof(Dictionary<,>);
         }
 
         /// <summary>
@@ -80,7 +72,7 @@ namespace Option
         /// </summary>
         public static Option<T> TryFirst<T>(this IEnumerable<T> input, Func<T, bool> predicate)
         {
-            CheckArgumentIsNotNull(input);
+            input.CheckArgumentIsNotNull();
 
             return input
                 .FirstOrDefault(predicate)
@@ -141,16 +133,11 @@ namespace Option
         /// </summary>
         public static Option<T> TrySingle<T>(this IEnumerable<T> input, Func<T, bool> predicate)
         {
-            CheckArgumentIsNotNull(input);
+            input.CheckArgumentIsNotNull();
 
             return input
                 .SingleOrDefault(predicate)
                 .OptionFromValueOrDefault();
-        }
-        
-        private static void CheckArgumentIsNotNull<TX>(IEnumerable<TX> input)
-        {
-            if (input == null) throw new ArgumentNullException(nameof(input));
         }
     }
 }

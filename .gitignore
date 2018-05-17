@@ -1,6 +1,6 @@
 .vs/
-Option.Tests.Unit/bin/
-Option.Tests.Unit/obj/
+tests/Option.Tests.Unit/bin/
+tests/Option.Tests.Unit/obj/
 *.ncrunchsolution
-Option/obj/
-packages/
+src/Option/bin/
+src/Option/obj/

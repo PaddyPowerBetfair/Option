@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>e5166b13-dc3b-47be-9e34-47420cadfecd</PackageId>
+    <Company>Paddy Power Betfair</Company>
+    <Authors>ppb-developers</Authors>
+    <Description>Option - maybe monad</Description>
+    <Copyright>Copyright ©  2018</Copyright>
+  </PropertyGroup>
+
+</Project>

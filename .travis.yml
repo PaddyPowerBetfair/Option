@@ -1,2 +1,2 @@
 language: csharp
-solution: Option.sln
+solution: src\Option.sln

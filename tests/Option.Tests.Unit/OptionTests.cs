@@ -5,8 +5,11 @@ namespace Option.Tests.Unit
    
     public class OptionTests
     {
+
+        #region Option.ValueOr
+
         [Fact]
-        public void OptionValueOrSomeStringTest()
+        public void Option_WhenOptionContainsValue_ValueOrShouldProvideContainedValue()
         {
             var option = Option.Some("test");
             var check = option.ValueOr(string.Empty);
@@ -16,7 +19,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionValueOrNoneStringTest()
+        public void Option_WhenOptionDoesNotContainValue_ValueOrShouldProvideParameterValue()
         {
             var option = Option.None<string>();
             var check = option.ValueOr("test");
@@ -24,8 +27,12 @@ namespace Option.Tests.Unit
             Assert.Equal("test", check);
         }
 
+        #endregion
+
+        #region Equals
+
         [Fact]
-        public void OptionEqualsBothStrings()
+        public void Option_WhenTwoOptionsContainingTheSameReferenceValueAreCompared_EqualsShouldReturnTrue()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.Some("test");
@@ -34,7 +41,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsOneStrings()
+        public void Option_WhenOptionContainingReferenceValueComparedWithNoneOption_EqualsShouldReturnFalse()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.None<string>();
@@ -43,7 +50,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsStringsDifferent()
+        public void Option_WhenOptionsContainingDifferentReferenceValuesAreCompared_EqualsShouldReturnFalse()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.Some("test2");
@@ -52,7 +59,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsInt()
+        public void Option_WhenOptionsContainingTheSameValueAreCompared_EqualsShouldReturnTrue()
         {
             var firstOption = Option.Some(10);
             var secondOption = Option.Some(10);
@@ -61,7 +68,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsIntDifferent()
+        public void Option_WhenOptionsContainingDifferentValuesAreCompared_EqualsShouldReturnFalse()
         {
             var firstOption = Option.Some(10);
             var secondOption = Option.Some(11);
@@ -69,8 +76,11 @@ namespace Option.Tests.Unit
             Assert.False(firstOption.Equals(secondOption));
         }
 
+        #endregion
+
+        #region Options == operator
         [Fact]
-        public void OptionEqualsOperator()
+        public void Option_WhenTwoOptionsContainingTheSameReferenceValueAreComparedWithEqualityOperator_TheyShouldBeEquals()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.Some("test");
@@ -79,7 +89,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsOneStringsOperator()
+        public void Option_WhenOptionContainingReferenceValueComparedWithNoneOptionWithEqualityOperator_TheyShouldNotBeEquals()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.None<string>();
@@ -88,7 +98,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsStringsDifferentOperator()
+        public void Option_WhenOptionsContainingDifferentReferenceValuesAreComparedWithEqualityOperator_TheyShouldNotBeEquals()
         {
             var firstOption = Option.Some("test");
             var secondOption = Option.Some("test2");
@@ -97,7 +107,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsIntOperator()
+        public void Option_WhenOptionsContainingTheSameValueAreComparedWithEqualityOperator_TheyShouldBeEquals()
         {
             var firstOption = Option.Some(10);
             var secondOption = Option.Some(10);
@@ -106,7 +116,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionEqualsIntDifferentOperator()
+        public void Option_WhenOptionsContainingDifferentValuesAreComparedWithEqualityOperator_TheyShouldNotBeEquals()
         {
             var firstOption = Option.Some(10);
             var secondOption = Option.Some(11);
@@ -114,8 +124,13 @@ namespace Option.Tests.Unit
             Assert.True(firstOption != secondOption);
         }
 
+        #endregion
+
+        #region Option.GetHashCode
+
+
         [Fact]
-        public void OptionGetHashCodeInt()
+        public void Option_WhenHashCodeOfOptionContainingIntIsCalculated_HasCodeShouldBeInt()
         {
             var option = Option.Some(1).GetHashCode();
 
@@ -123,15 +138,19 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionGetHashCodeString()
+        public void Option_WhenHashCodeOfOptionContainingStringIsCalculated_HasCodeShouldBeInt()
         {
             var option = Option.Some("test").GetHashCode();
 
             Assert.IsType<int>(option);
         }
 
+        #endregion
+
+        #region Option.ToString
+
         [Fact]
-        public void OptionToStringString()
+        public void Option_WhenToStringCalledOnOptionContainingString_ResultShouldCorrespondToGenericTypeDefintion()
         {
             var option = Option.Some("test").ToString();
 
@@ -139,12 +158,14 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionToStringInt()
+        public void Option_WhenToStringCalledOnOptionContainingInt_ResultShouldCorrespondToGenericTypeDefintion()
         {
             var option = Option.Some(10).ToString();
 
             Assert.Equal("Some<Int32>(10)", option);
         }
+
+        #endregion
 
     }
 }

@@ -6,8 +6,11 @@ namespace Option.Tests.Unit
 {
     public class OptionFactoryTests
     {
+
+        #region OptionFactory.Some
+
         [Fact]
-        public void OptionCreateSomeString()
+        public void OptionFactory_SomeCalledWithString_StringAndValueShouldBeEquals()
         {
             var some = Option.Some("test");
 
@@ -16,7 +19,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionCreateSomeEmptyString()
+        public void OptionFactory_SomeCalledWithEmptyString_ValueShouldBeEmptyString()
         {
             var some = Option.Some(string.Empty);
 
@@ -25,7 +28,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionCreateSomeObject()
+        public void OptionFactory_SomeCalledWithObject_ObjectAndValueShouldBeEquals()
         {
             var o = new object();
             var some = Option.Some(o);
@@ -34,8 +37,12 @@ namespace Option.Tests.Unit
             Assert.Equal(o, some.Value);
         }
 
+        #endregion
+
+        #region OptionFactory.None
+
         [Fact]
-        public void OptionCreateNoneString()
+        public void OptionFactory_NoneCalledWithStringType_IsNoneShouldReturnTrue()
         {
             var none = Option.None<string>();
 
@@ -43,15 +50,19 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionCreateNoneObject()
+        public void OptionFactory_NoneCalledWithObjectType_IsNoneShouldReturnTrue()
         {
             var none = Option.None<object>();
 
             Assert.True(none.IsNone);
         }
 
+        #endregion
+
+        #region OptionFactory.Try
+
         [Fact]
-        public void OptionTrySomeString()
+        public void OptionFactory_TryCalledWithLambdaReturningString_ValueAndStringShouldBeEquals()
         {
             var @try = Option.Try(() => "test");
 
@@ -60,7 +71,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionTrySomeEmptyString()
+        public void OptionFactory_TryCalledWithLambdaReturningEmptyString_ValueAndStringShouldBeEquals()
         {
             var @try = Option.Try(() => string.Empty);
 
@@ -69,7 +80,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionTrySomeObject()
+        public void OptionFactory_TryCalledWithLambdaReturningObject_ValueAndObjectShouldBeEquals()
         {
             var o = new object();
             var @try = Option.Try(() => o);
@@ -79,15 +90,19 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionTryNoneException()
+        public void OptionFactory_TryCallThrowsException_IsNoneShouldBeTrue()
         {
             var @try = Option.Try(GetException);
 
             Assert.True(@try.IsNone);
         }
 
+        #endregion
+
+        #region OptionFactory.From
+
         [Fact]
-        public void OptionFromString()
+        public void OptionFactory_FromCalledWithString_ValueAndStringShouldBeEquals()
         {
             var from = Option.From("test");
 
@@ -96,7 +111,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionFromStringEmpty()
+        public void OptionFactory_FromCalledWithEmptyString_ValueShouldBeEmptyString()
         {
             var from = Option.From(string.Empty);
 
@@ -105,7 +120,7 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionFromObject()
+        public void OptionFactory_FromCalledWithObject_ValueAndObjectShouldBeEquals()
         {
             var o = new object();
             var from = Option.From(o);
@@ -115,15 +130,21 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionFromNull()
+        public void OptionFactory_FromCalledWithNull_IsNoneShouldBeTrue()
         {
             var from = Option.From((string) null);
             Assert.True(from.IsNone);
         }
 
+        #endregion
+
+        #region Helpers
+
         private static string GetException()
         {
             throw new Exception();
         }
+
+        #endregion
     }
 }

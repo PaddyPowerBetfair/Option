@@ -6,8 +6,10 @@ namespace Option.Tests.Unit
     
     public class OptionExTests
     {
+
+        #region OptionExtensions ToNullable
         [Fact]
-        public void OptionExToNullable()
+        public void OptionExtensions_ToNullableCalledOnOptionContainingObject_ObjectShouldBeRetained()
         {
             var counter = Option.Some(new Counter()).ToNullable();
 
@@ -18,7 +20,7 @@ namespace Option.Tests.Unit
 
         
         [Fact]
-        public void OptionExToNullableWithItems()
+        public void OptionExtensions_ToNullableCalledOnOptionContainingObject_StateOfObjectShouldBeRetained()
         {
             var counter = Option.Some(new Counter{Count = 1, Item = 2}).ToNullable();
 
@@ -27,8 +29,12 @@ namespace Option.Tests.Unit
             Assert.Equal(1, counter.Value.Count);
         }
 
+        #endregion
+
+        #region OptionExtensions Select
+
         [Fact]
-        public void OptionExSelectSome()
+        public void OptionExtensions_SelectSomeCalledWithLambda_ValueAndResultOfLambdaShouldBeEquals()
         {
             var option = Option.Some("test")
                 .Select(item => item.Length);
@@ -38,13 +44,15 @@ namespace Option.Tests.Unit
         }
 
         [Fact]
-        public void OptionExSelectNone()
+        public void OptionExtensions_SelectCalledWithLambdaOnOptionWithoutValue_IsNoneShouldBeTrue()
         {
             var option = Option.None<string>()
                 .Select(item => item.Length);
 
             Assert.True(option.IsNone);
         }
+
+        #endregion
     }
 
 }

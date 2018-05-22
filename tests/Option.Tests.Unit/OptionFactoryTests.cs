@@ -1,124 +1,124 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
 
 namespace Option.Tests.Unit
 {
-    [TestClass]
     public class OptionFactoryTests
     {
-        [TestMethod]
+        [Fact]
         public void OptionCreateSomeString()
         {
             var some = Option.Some("test");
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual("test", some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal("test", some.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionCreateSomeEmptyString()
         {
             var some = Option.Some(string.Empty);
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual(string.Empty, some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal(string.Empty, some.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionCreateSomeObject()
         {
             var o = new object();
             var some = Option.Some(o);
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual(o, some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal(o, some.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionCreateNoneString()
         {
             var none = Option.None<string>();
 
-            Assert.IsTrue(none.IsNone);
+            Assert.True(none.IsNone);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionCreateNoneObject()
         {
             var none = Option.None<object>();
 
-            Assert.IsTrue(none.IsNone);
+            Assert.True(none.IsNone);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionTrySomeString()
         {
             var @try = Option.Try(() => "test");
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual("test", @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal("test", @try.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionTrySomeEmptyString()
         {
             var @try = Option.Try(() => string.Empty);
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual(string.Empty, @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal(string.Empty, @try.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionTrySomeObject()
         {
             var o = new object();
             var @try = Option.Try(() => o);
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual(o, @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal(o, @try.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionTryNoneException()
         {
             var @try = Option.Try(GetException);
 
-            Assert.IsTrue(@try.IsNone);
+            Assert.True(@try.IsNone);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionFromString()
         {
             var from = Option.From("test");
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual("test", from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal("test", from.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionFromStringEmpty()
         {
             var from = Option.From(string.Empty);
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual(string.Empty, from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal(string.Empty, from.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionFromObject()
         {
             var o = new object();
             var from = Option.From(o);
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual(o, from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal(o, from.Value);
         }
 
-        [TestMethod]
+        [Fact]
         public void OptionFromNull()
         {
             var from = Option.From((string) null);
-            Assert.IsTrue(from.IsNone);
+            Assert.True(from.IsNone);
         }
 
         private static string GetException()

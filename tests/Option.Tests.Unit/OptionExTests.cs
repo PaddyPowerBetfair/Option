@@ -1,55 +1,58 @@
-﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Option.Tests.Unit.Helpers;
+using Xunit;
 
 namespace Option.Tests.Unit
 {
-    [TestClass]
+    
     public class OptionExTests
     {
-        [TestMethod]
-        public void OptionExToNullable()
+
+        #region OptionExtensions ToNullable
+        [Fact]
+        public void OptionExtensions_ToNullableCalledOnOptionContainingObject_ObjectShouldBeRetained()
         {
             var counter = Option.Some(new Counter()).ToNullable();
 
-            Assert.IsTrue(counter.HasValue);
-            Assert.AreEqual(0, counter.Value.Item);
-            Assert.AreEqual(0, counter.Value.Count);
+            Assert.True(counter.HasValue);
+            Assert.Equal(0, counter.Value.Item);
+            Assert.Equal(0, counter.Value.Count);
         }
 
-        [TestMethod]
-        public void OptionExToNullableWithItems()
+        
+        [Fact]
+        public void OptionExtensions_ToNullableCalledOnOptionContainingObject_StateOfObjectShouldBeRetained()
         {
             var counter = Option.Some(new Counter{Count = 1, Item = 2}).ToNullable();
 
-            Assert.IsTrue(counter.HasValue);
-            Assert.AreEqual(2, counter.Value.Item);
-            Assert.AreEqual(1, counter.Value.Count);
+            Assert.True(counter.HasValue);
+            Assert.Equal(2, counter.Value.Item);
+            Assert.Equal(1, counter.Value.Count);
         }
 
-        [TestMethod]
-        public void OptionExSelectSome()
+        #endregion
+
+        #region OptionExtensions Select
+
+        [Fact]
+        public void OptionExtensions_SelectSomeCalledWithLambda_ValueAndResultOfLambdaShouldBeEquals()
         {
             var option = Option.Some("test")
                 .Select(item => item.Length);
 
-            Assert.IsTrue(option.HasValue);
-            Assert.AreEqual(4, option.Value);
+            Assert.True(option.HasValue);
+            Assert.Equal(4, option.Value);
         }
 
-        [TestMethod]
-        public void OptionExSelectNone()
+        [Fact]
+        public void OptionExtensions_SelectCalledWithLambdaOnOptionWithoutValue_IsNoneShouldBeTrue()
         {
             var option = Option.None<string>()
                 .Select(item => item.Length);
 
-            Assert.IsTrue(option.IsNone);
+            Assert.True(option.IsNone);
         }
-    }
 
-    public struct Counter
-    {
-        public int Item;
-        public int Count;
+        #endregion
     }
 
 }

@@ -1,129 +1,150 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+
 
 namespace Option.Tests.Unit
 {
-    [TestClass]
     public class OptionFactoryTests
     {
-        [TestMethod]
-        public void OptionCreateSomeString()
+
+        #region OptionFactory.Some
+
+        [Fact]
+        public void OptionFactory_SomeCalledWithString_StringAndValueShouldBeEquals()
         {
             var some = Option.Some("test");
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual("test", some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal("test", some.Value);
         }
 
-        [TestMethod]
-        public void OptionCreateSomeEmptyString()
+        [Fact]
+        public void OptionFactory_SomeCalledWithEmptyString_ValueShouldBeEmptyString()
         {
             var some = Option.Some(string.Empty);
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual(string.Empty, some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal(string.Empty, some.Value);
         }
 
-        [TestMethod]
-        public void OptionCreateSomeObject()
+        [Fact]
+        public void OptionFactory_SomeCalledWithObject_ObjectAndValueShouldBeEquals()
         {
             var o = new object();
             var some = Option.Some(o);
 
-            Assert.IsTrue(some.HasValue);
-            Assert.AreEqual(o, some.Value);
+            Assert.True(some.HasValue);
+            Assert.Equal(o, some.Value);
         }
 
-        [TestMethod]
-        public void OptionCreateNoneString()
+        #endregion
+
+        #region OptionFactory.None
+
+        [Fact]
+        public void OptionFactory_NoneCalledWithStringType_IsNoneShouldReturnTrue()
         {
             var none = Option.None<string>();
 
-            Assert.IsTrue(none.IsNone);
+            Assert.True(none.IsNone);
         }
 
-        [TestMethod]
-        public void OptionCreateNoneObject()
+        [Fact]
+        public void OptionFactory_NoneCalledWithObjectType_IsNoneShouldReturnTrue()
         {
             var none = Option.None<object>();
 
-            Assert.IsTrue(none.IsNone);
+            Assert.True(none.IsNone);
         }
 
-        [TestMethod]
-        public void OptionTrySomeString()
+        #endregion
+
+        #region OptionFactory.Try
+
+        [Fact]
+        public void OptionFactory_TryCalledWithLambdaReturningString_ValueAndStringShouldBeEquals()
         {
             var @try = Option.Try(() => "test");
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual("test", @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal("test", @try.Value);
         }
 
-        [TestMethod]
-        public void OptionTrySomeEmptyString()
+        [Fact]
+        public void OptionFactory_TryCalledWithLambdaReturningEmptyString_ValueAndStringShouldBeEquals()
         {
             var @try = Option.Try(() => string.Empty);
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual(string.Empty, @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal(string.Empty, @try.Value);
         }
 
-        [TestMethod]
-        public void OptionTrySomeObject()
+        [Fact]
+        public void OptionFactory_TryCalledWithLambdaReturningObject_ValueAndObjectShouldBeEquals()
         {
             var o = new object();
             var @try = Option.Try(() => o);
 
-            Assert.IsTrue(@try.HasValue);
-            Assert.AreEqual(o, @try.Value);
+            Assert.True(@try.HasValue);
+            Assert.Equal(o, @try.Value);
         }
 
-        [TestMethod]
-        public void OptionTryNoneException()
+        [Fact]
+        public void OptionFactory_TryCallThrowsException_IsNoneShouldBeTrue()
         {
             var @try = Option.Try(GetException);
 
-            Assert.IsTrue(@try.IsNone);
+            Assert.True(@try.IsNone);
         }
 
-        [TestMethod]
-        public void OptionFromString()
+        #endregion
+
+        #region OptionFactory.From
+
+        [Fact]
+        public void OptionFactory_FromCalledWithString_ValueAndStringShouldBeEquals()
         {
             var from = Option.From("test");
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual("test", from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal("test", from.Value);
         }
 
-        [TestMethod]
-        public void OptionFromStringEmpty()
+        [Fact]
+        public void OptionFactory_FromCalledWithEmptyString_ValueShouldBeEmptyString()
         {
             var from = Option.From(string.Empty);
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual(string.Empty, from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal(string.Empty, from.Value);
         }
 
-        [TestMethod]
-        public void OptionFromObject()
+        [Fact]
+        public void OptionFactory_FromCalledWithObject_ValueAndObjectShouldBeEquals()
         {
             var o = new object();
             var from = Option.From(o);
 
-            Assert.IsTrue(from.HasValue);
-            Assert.AreEqual(o, from.Value);
+            Assert.True(from.HasValue);
+            Assert.Equal(o, from.Value);
         }
 
-        [TestMethod]
-        public void OptionFromNull()
+        [Fact]
+        public void OptionFactory_FromCalledWithNull_IsNoneShouldBeTrue()
         {
             var from = Option.From((string) null);
-            Assert.IsTrue(from.IsNone);
+            Assert.True(from.IsNone);
         }
+
+        #endregion
+
+        #region Helpers
 
         private static string GetException()
         {
             throw new Exception();
         }
+
+        #endregion
     }
 }

@@ -48,9 +48,7 @@ but the `struct` constraint for `T` in it makes it impossible to use with the re
 
 # How to use it
 
-Our hardworking teammates are trying to publish the Option Library to [nuget](https://www.nuget.org/) #4
-
-But until then you can download/clone/fork this repository and build it locally. 
+Our hardworking teammates are [trying to publish the Option Library](https://github.com/PaddyPowerBetfair/Option/issues/4) to [nuget](https://www.nuget.org/) , but until then you can download/clone/fork this repository and build it locally. 
 
 Option library targets **.NET Starndard 2.0** , so you can use it with **.NET Core 2.0+**, **.NET Framework 4.6.1+** and many other platforms. Please, see the [platform support.](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 

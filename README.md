@@ -1,32 +1,58 @@
 # Option
 
-Option is a C# representation of the maybe monad
+Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exception and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code.
 
-### Monad
-Monads are used to encapsulate a value and simplify handling of unusual cases. You can think of monads as generic types.
+### nested if statements : ugly code and hard to follow, known as [arrow anti pattern](http://wiki.c2.com/?ArrowAntiPattern)
 
-### Maybe
-Maybe is a data type (also known as an option type) which is used to represent an optional value.
+```cs
+var player = db.Players.FirstOrDefault(p => p.Name == keyword);
+if (player != null)
+{
+    Console.WriteLine(player.Name);
+    var team = db.Teams.Find(t => t.Id == player.Id);
+    if (team != null)
+    {
+        Console.WriteLine(team.Name);
+    }
+}
+```
+### can be refactored using [Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html) , but still with null checking
 
-### Maybe Monad
-Maybe monad is a generic type which contains either some value of it's underlying type or nothing.
+```cs
+var player = db.Players.FirstOrDefault(p => p.Name == keyword);
+if (player == null)
+    return;
+Console.WriteLine(player.Name);
+var team = db.Teams.Find(t => t.Id == player.Id);
+if (team == null)
+    return;
+Console.WriteLine(team.Name);
+```
 
-If you need more information you can check [wikibooks introduction](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) to maybe monad.
+### refactored using  Option Library, compact code which is easy to follow with safe chaining of steps 
+
+```cs
+Option
+    .From(db.Players.FirstOrDefault(p => p.Name == keyword))
+    .Try(p => Console.WriteLine(p.Name))
+    .Select(p => db.Teams.Find(t => t.Id == p.TeamId))
+    .Try(t => Console.WriteLine(t.Name))
+```
 
 # Why we need the Option library?
 
-> For simplicity you can think of `Nullable<T>` being closest thing to the maybe monad in C#. Although it doesn't represent all the characteristics of the maybe monad, it's sufficient enough to give the main idea.
+For simplicity you can think of [`Nullable<T>`](https://msdn.microsoft.com/en-us/library/b3h38hb0(v=vs.110).aspx) being closest thing to the maybe monad in C#. Although it doesn't represent all the characteristics of the maybe monad, it's sufficient enough to give the main idea.
 
 At first glance, extending `Nullable<T>` might be a good option, 
 but the `struct` constraint for `T` in it makes it impossible to use with the reference types.
 
-Using maybe monad also makes code more readable by reducing the nested code blocks, as you will see in the following examples.
-
 # How to use it
 
-Our hardworking teammates are trying to publish the Option library to [nuget](https://www.nuget.org/), but until then you can download/clone/fork this repository and build it locally. 
+Our hardworking teammates are trying to publish the Option Library to [nuget](https://www.nuget.org/) #4
 
-> Option library targets **.NET Starndard 2.0** , so you can use it with **.NET Core 2.0+**, **.NET Framework 4.6.1+** and many other platforms. Please, see the [platform support.](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
+But until then you can download/clone/fork this repository and build it locally. 
+
+Option library targets **.NET Starndard 2.0** , so you can use it with **.NET Core 2.0+**, **.NET Framework 4.6.1+** and many other platforms. Please, see the [platform support.](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 # Examples
 
@@ -42,7 +68,7 @@ Debug.Assert(number.HasValue);
 Debug.Assert(str.HasValue);
 ```
 
-`None`
+`None` - 
 
 ```cs
 var nan = Option.None<int>();
@@ -62,7 +88,7 @@ Debug.Assert(copy.Value == "apple"); // Option.Some("apple")
 Debug.Assert(!copy.HasValue); // Option.None<string>()
 
 ```
-`Try`
+`Try` - try possible exception throwing statements safely
 
 ```cs
 int zero = 0;
@@ -80,7 +106,7 @@ Debug.Assert(!fail.HasValue); // Option.None<int>()
 var defaultValue = number.Value; //not safe. might throw InvalidOperationException
 var unsafeValue = nan.Value; //not safe. might throw InvalidOperationException
 var safeValue = nan.ValueOrNull; // safe. returns Value or default(T)
-var alternativeValue = nan.ValueOr(-1); //safe returns Value or -1 as an alternative value
+var alternativeValue = nan.ValueOr(-1); //safe. returns Value or -1 as an alternative value
 ```
 
 ### Basic extension methods

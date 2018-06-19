@@ -1,6 +1,6 @@
 # Option
 
-Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exception and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code base.
+Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exceptions and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code base.
 
 ### **Use Option library** for *compact code* which is *easy to follow* with safe chaining of steps :
 
@@ -13,7 +13,7 @@ Option
 ```
 
 
-### **Instead of using nested if statements** which lead to *less readable code* and *hard to follow* [arrow anti pattern](http://wiki.c2.com/?ArrowAntiPattern)
+### **Instead of using nested if statements** which leads to *less readable code* and *hard to follow* [arrow anti pattern](http://wiki.c2.com/?ArrowAntiPattern)
 
 ```cs
 var player = db.Players.FirstOrDefault(p => p.Name == keyword);

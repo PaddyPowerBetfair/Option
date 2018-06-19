@@ -1,2 +1,7 @@
 language: csharp
-solution: src\Option.sln
+solution: src/Option.sln
+mono: none
+dotnet: 2.1
+script:
+ - dotnet build src/Option.sln
+ - dotnet test tests/Option.Tests.Unit

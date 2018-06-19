@@ -1,8 +1,19 @@
 # Option
 
-Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exception and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code.
+Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exception and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code base.
 
-### nested if statements : ugly code and hard to follow, known as [arrow anti pattern](http://wiki.c2.com/?ArrowAntiPattern)
+### **Use Option library** for *compact code* which is *easy to follow* with safe chaining of steps :
+
+```cs
+Option
+    .From(db.Players.FirstOrDefault(p => p.Name == keyword))
+    .Try(p => Console.WriteLine(p.Name))
+    .Select(p => db.Teams.Find(t => t.Id == p.TeamId))
+    .Try(t => Console.WriteLine(t.Name))
+```
+
+
+### **Instead of using nested if statements** which lead to *less readable code* and *hard to follow* [arrow anti pattern](http://wiki.c2.com/?ArrowAntiPattern)
 
 ```cs
 var player = db.Players.FirstOrDefault(p => p.Name == keyword);
@@ -16,28 +27,6 @@ if (player != null)
     }
 }
 ```
-### can be refactored using [Guard Clauses](https://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html) , but still with null checking
-
-```cs
-var player = db.Players.FirstOrDefault(p => p.Name == keyword);
-if (player == null)
-    return;
-Console.WriteLine(player.Name);
-var team = db.Teams.Find(t => t.Id == player.Id);
-if (team == null)
-    return;
-Console.WriteLine(team.Name);
-```
-
-### refactored using  Option Library, compact code which is easy to follow with safe chaining of steps 
-
-```cs
-Option
-    .From(db.Players.FirstOrDefault(p => p.Name == keyword))
-    .Try(p => Console.WriteLine(p.Name))
-    .Select(p => db.Teams.Find(t => t.Id == p.TeamId))
-    .Try(t => Console.WriteLine(t.Name))
-```
 
 # Why we need the Option library?
 
@@ -46,11 +35,11 @@ For simplicity you can think of [`Nullable<T>`](https://msdn.microsoft.com/en-us
 At first glance, extending `Nullable<T>` might be a good option, 
 but the `struct` constraint for `T` in it makes it impossible to use with the reference types.
 
-# How to use it
+# How to use the Option library?
 
 Our hardworking teammates are [trying to publish the Option Library](https://github.com/PaddyPowerBetfair/Option/issues/4) to [nuget](https://www.nuget.org/) , but until then you can download/clone/fork this repository and build it locally. 
 
-Option library targets **.NET Starndard 2.0** , so you can use it with **.NET Core 2.0+**, **.NET Framework 4.6.1+** and many other platforms. Please, see the [platform support.](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
+Option library targets **.NET Standard 2.0** , so you can use it with **.NET Core 2.0+**, **.NET Framework 4.6.1+** and many other platforms. Please, see the [platform support.](https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md)
 
 # Examples
 

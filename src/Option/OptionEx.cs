@@ -13,8 +13,8 @@ namespace Option
         public static T? ToNullable<T>(this Option<T> x)
             where T : struct
         {
-            return x.HasValue 
-                ? (T?)x.Value 
+            return x.HasValue
+                ? (T?)x.Value
                 : null;
         }
 
@@ -24,8 +24,8 @@ namespace Option
         /// </summary>
         public static Option<TY> Select<TX, TY>(this Option<TX> x, Func<TX, TY> f)
         {
-            return x.HasValue 
-                ? Option.Some(f(x.Value)) 
+            return x.HasValue
+                ? Option.Some(f(x.Value))
                 : Option.None<TY>();
         }
 
@@ -35,8 +35,8 @@ namespace Option
         /// </summary>
         public static Option<TY> SelectMany<TX, TY>(this Option<TX> x, Func<TX, Option<TY>> f)
         {
-            return x.HasValue 
-                ? f(x.Value) 
+            return x.HasValue
+                ? f(x.Value)
                 : Option.None<TY>();
         }
 
@@ -68,8 +68,8 @@ namespace Option
         public static Option<IEnumerable<T>> Flatten<T>(this IEnumerable<Option<T>> xs)
         {
             var xsTilde = xs.Cache();
-            return xsTilde.All(x => x.HasValue) 
-                ? Option.Some(xsTilde.Select(x => x.Value)) 
+            return xsTilde.All(x => x.HasValue)
+                ? Option.Some(xsTilde.Select(x => x.Value))
                 : Option.None<IEnumerable<T>>();
         }
 
@@ -81,6 +81,23 @@ namespace Option
             return EqualityComparer<T>.Default.Equals(valueOrDefault, default(T))
                 ? Option.None<T>()
                 : Option.Some(valueOrDefault);
+        }
+
+        /// <summary>
+        /// Tries an action and returns None if fails
+        /// </summary>
+        public static Option<T> Try<T>(this Option<T> option, Action<T> action)
+        {
+            try
+            {
+                action(option.Value);
+
+                return option;
+            }
+            catch
+            {
+                return Option<T>.None();
+            }
         }
     }
 }

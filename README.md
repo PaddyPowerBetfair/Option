@@ -1,5 +1,7 @@
 # Option
 
+[![Build Status](https://travis-ci.org/PaddyPowerBetfair/Option.svg?branch=master)](https://travis-ci.org/PaddyPowerBetfair/Option)
+
 Option Library is a C# representation of the [maybe monad](https://en.wikibooks.org/wiki/Haskell/Understanding_monads/Maybe) which provides a good way to deal with the exceptional cases by reducing the number of  [exceptions and null checkings](https://en.wikipedia.org/wiki/Exception_handling#Checked_exceptions) as well as the nested blocks in the code which leads to a more compact and more readable code base.
 
 ### **Use Option library** for *compact code* which is *easy to follow* with safe chaining of steps :

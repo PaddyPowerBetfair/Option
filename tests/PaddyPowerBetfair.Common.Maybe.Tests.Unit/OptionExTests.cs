@@ -1,7 +1,8 @@
-﻿using Option.Tests.Unit.Helpers;
+﻿using PaddyPowerBetfair.Common.Maybe.Extensions;
+using PaddyPowerBetfair.Common.Maybe.Tests.Unit.Helpers;
 using Xunit;
 
-namespace Option.Tests.Unit
+namespace PaddyPowerBetfair.Common.Maybe.Tests.Unit
 {
     
     public class OptionExTests

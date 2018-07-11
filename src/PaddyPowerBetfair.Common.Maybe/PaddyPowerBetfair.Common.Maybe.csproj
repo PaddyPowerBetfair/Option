@@ -7,6 +7,8 @@
     <Authors>ppb-developers</Authors>
     <Description>Option - maybe monad</Description>
     <Copyright>Copyright ©  2018</Copyright>
+    <AssemblyName>PaddyPowerBetfair.Common.Maybe</AssemblyName>
+    <RootNamespace>PaddyPowerBetfair.Common.Maybe</RootNamespace>
   </PropertyGroup>
 
 </Project>

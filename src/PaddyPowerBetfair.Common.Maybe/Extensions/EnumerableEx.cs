@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Option
+namespace PaddyPowerBetfair.Common.Maybe.Extensions
 {
     public static class EnumerableEx
     {

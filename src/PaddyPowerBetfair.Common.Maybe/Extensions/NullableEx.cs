@@ -1,5 +1,4 @@
-﻿
-namespace Option
+﻿namespace PaddyPowerBetfair.Common.Maybe.Extensions
 {
     public static class NullableEx
     {

@@ -1,8 +1,7 @@
 ﻿using System;
 using Xunit;
 
-
-namespace Option.Tests.Unit
+namespace PaddyPowerBetfair.Common.Maybe.Tests.Unit
 {
     public class OptionFactoryTests
     {

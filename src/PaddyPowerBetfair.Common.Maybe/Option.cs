@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Option
+namespace PaddyPowerBetfair.Common.Maybe
 {
     /// <summary>
     /// The option type is used when an actual value might not exist for a named value or variable.

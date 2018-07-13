@@ -1,6 +1,7 @@
 ﻿using System;
+using PaddyPowerBetfair.Common.Maybe.Core;
 
-namespace Option
+namespace PaddyPowerBetfair.Common.Maybe.Extensions
 {
     public static class EnumEx
     {

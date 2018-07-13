@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Option
+namespace PaddyPowerBetfair.Common.Maybe
 {
     /// <summary>
     /// Option factory, contains convenience constructors for Option types.

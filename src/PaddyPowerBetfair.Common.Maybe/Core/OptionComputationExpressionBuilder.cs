@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Option
+namespace PaddyPowerBetfair.Common.Maybe.Core
 {
     /// <summary>
     /// Provides a computation expression where option operations can be easily chained.

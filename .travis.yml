@@ -1,7 +1,7 @@
 language: csharp
-solution: src/Option.sln
+solution: src/PaddyPowerBetfair.Common.Maybe.sln
 mono: none
 dotnet: 2.1
 script:
- - dotnet build src/Option.sln
- - dotnet test tests/Option.Tests.Unit
+ - dotnet build src/PaddyPowerBetfair.Common.Maybe.sln
+ - dotnet test tests/PaddyPowerBetfair.Common.Maybe.Tests.Unit
